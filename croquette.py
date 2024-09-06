@@ -11,6 +11,8 @@ from pixelate import *
 picture = "cat picture.png"
 loop_amount = 3
 
+# BEEP BEEP BOOP BOOP
+
 def run():
     if len(sys.argv) == 1:
         print('\n'
