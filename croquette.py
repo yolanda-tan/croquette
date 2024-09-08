@@ -59,4 +59,4 @@ def displayLoop():
     return display(finished)
 
 run()
-# croqudisplayLoop()
+# displayLoop()
