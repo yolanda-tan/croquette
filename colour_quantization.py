@@ -19,9 +19,9 @@ from pixelate import readimage
 from pixelate import display
 
 # also retain x and y
-def makePixelList(image):
+def makePixelDict(pixel_list):
     massive_tuple_list = []
-    for x, row in enumerate(readimage(image)):
+    for x, row in enumerate(pixel_list):
         for y, colour in enumerate(row):
             newtuple = (colour[0], colour[1], colour[2], x, y)
             massive_tuple_list.append(newtuple)
@@ -40,7 +40,6 @@ def findDifference(massivedictlist):
         # big
         big = 0
         for item in massivedictlist:
-            # print(item)
             if item[colour] > big:
                 big = item[colour]
         # small
@@ -80,12 +79,20 @@ def sortByKeyBlue(pixels):
     pixels.sort(key=sorter_blue)
     return pixels
 
-def sortBig(pixels):
+'''def sortBig(pixels):
     if findDifference(pixels)[0] == "r":
         return sortByKeyRed(pixels)
     if findDifference(pixels)[0] == "g":
         return sortByKeyGreen(pixels)
     if findDifference(pixels)[0] == "b":
+       return sortByKeyBlue(pixels)'''
+
+def sortBig(big_diff_key, pixels):
+    if big_diff_key == "r":
+        return sortByKeyRed(pixels)
+    if big_diff_key == "g":
+        return sortByKeyGreen(pixels)
+    if big_diff_key == "b":
        return sortByKeyBlue(pixels)
 
 # cutting the sorted list into two (pixels = sorted list)

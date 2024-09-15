@@ -8,8 +8,10 @@ from colour_quantization import *
 from loop import *
 from pixelate import *
 
-picture = "cat picture.png"
-loop_amount = 3
+picture = "tree.jpg"
+loop_amount = 4
+pixelwidth = 50
+gridcolour = "black"
 
 # BEEP BEEP BOOP BOOP
 
@@ -41,22 +43,23 @@ def run():
         if check(readimage(filename), int(pixelwidth)) > 1:
             display(add_grid(enlarge(pixelate(readimage(filename), int(pixelwidth), selector_average)), gridcolour))
 
-def displayColours():
+'''def displayColours(): # idk what this is
     original_list = readimage(picture)
-    massive_list = makePixelList(picture)
+    massive_list = makePixelDict(picture)
     sorted_list = sortBig(massive_list)
     first_list = cutFirstList(sorted_list)
     second_list = cutSecondList(sorted_list)
     average_colours = findAverageColour(first_list, second_list)
     implemented_colours = implementAverageColour(original_list, average_colours, first_list, second_list)
-    return display(implemented_colours)
+    return display(implemented_colours)'''
 
-def displayLoop():
+def quantizeColours():
     originalpixel = readimage(picture)
-    chopped_pieces = loopColourQuantization(picture, loop_amount)
-    colours = findAverageColour1(readimage(pixels))
-    finished = implementAverageColour1(originalpixel, colours, chopped_pieces)
-    return display(finished)
+    originaldict = makePixelDict(originalpixel)
+    chopped_pieces = loopColourQuantization(originaldict, loop_amount)
+    doColours(chopped_pieces, originalpixel)
+    return originalpixel
 
-run()
+# run()
 # displayLoop()
+display(add_grid(enlarge(pixelate(quantizeColours(), int(pixelwidth), selector_middle)), gridcolour))
